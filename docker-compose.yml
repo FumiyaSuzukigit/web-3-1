@@ -16,12 +16,6 @@ services:
     depends_on:
       - php
 
-  node:
-    image: node:16
-    tty: true
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
 
   php:
     build: ./docker/php
