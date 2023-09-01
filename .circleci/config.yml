@@ -6,7 +6,7 @@ jobs:
       - checkout
       - run:
           name: base64 decode env file
-          command: echo $ENV_FILE | base64 -di > .env.testing
+          command: echo $ENV_FILE | base64 -di > src/.env.testing
       - run:
           name: Install dependencies with Composer
           command: |
