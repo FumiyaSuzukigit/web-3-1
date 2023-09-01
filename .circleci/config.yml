@@ -1,51 +1,22 @@
 version: 2.1
 jobs:
-  # running commands on a basic image
-  Hello-World:
-    docker:
-      - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
-    steps:
-      - run:
-          name: Saying Hello
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  # fetching code from the repo
-  Fetch-Code:
-    docker:
-      - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
+  build:
+    machine: true
     steps:
       - checkout
       - run:
-          name: Getting the Code
-          command: |
-            ls -al
-            echo '^^^Your repo files^^^'
-  # running a node container
-  Using-Node:
-    docker:
-      - image: cimg/node:17.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
-    steps:
+          name: base64 decode env file
+          command: echo $ENV_FILE | base64 -di > .env.testing
       - run:
-          name: Running the Node Container
+          name: Install dependencies with Composer
           command: |
-            node -v
-workflows:
-  Example-Workflow:
-    jobs:
-      - Hello-World
-      - Fetch-Code:
-          requires:
-            - Hello-World
-      - Using-Node:
-          requires:
-            - Fetch-Code
+            docker-compose run --rm php composer install
+      - run:
+          name: Start all services declared in docker-compose.yml
+          command: docker-compose up -d
+      - run:
+          name: Clear config cache
+          command: docker-compose exec php php artisan config:clear
+      - run:
+          name: Run PHP tests in the feature directory
+          command: docker-compose exec php vendor/bin/phpunit --testsuite Feature
