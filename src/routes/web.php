@@ -7,7 +7,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\StripeController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\ManagementController;
 
