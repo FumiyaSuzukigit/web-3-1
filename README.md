@@ -69,7 +69,7 @@ jquery:3.4.1/
 <img width="1152" alt="テーブル仕様書" src="https://github.com/nojinogit/web-3-1/assets/127584258/eddd06d0-3cb7-4cde-8afe-04c8cafa4d73">
 
 #ER 図  
-<img width="624" alt="rese-ER" src="https://github.com/nojinogit/web-3-1/assets/127584258/6f66d755-3d43-4516-8194-8281b5809bcb">
+<img width="624" alt="rese-ER" src="https://github.com/nojinogit/web-3-1/assets/127584258/b24e8e62-20e2-4917-9a18-fb279b4f3b3b">
 
 #環境構築  
 ・プロジェクトをコピーしたいディレクトリにて「git clone https://github.com/nojinogit/web-2-1.git」を行いプロジェクトをコピー  
