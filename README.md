@@ -57,6 +57,17 @@ phpMyAdmin‥データベース確認ページ　http://43.207.2.213:8080/
 入金残高有ユーザーのみ表示機能  
 入金完了記録機能
 
+追加実装項目について  
+管理画面について、今回は権限は管理者と一般ユーザーの 2 つです（運営確認済み）  
+QR コード機能については実装せず別の独自機能を実装しました（運営確認済み）  
+独自機能について  
+・商品のおすすめ機能 ‥最後と最後から２番目に見た商品に付けられているタグを持つ商品を表示するようにしました  
+・クレジット決済+コンビニ決済‥決済方法にクレジット決済(前回利用カードの再利用もできるようにする)・コンビニ決済を追加し、決済方法を３種類としました  
+・購入後処理‥商品が購入された後に入金待ち・発送待ち・発送済みといったメッセージを商品画像上に表示。
+また出品者の商品詳細ページに発送先と発送完了ボタンをつけました  
+・ポイント‥購入額の１％のポイントを付与し、次回から 1 ポイント＝１円で使用可能にしました  
+・出品者への入金表示と完了処理‥出品者の入金口座登録機能と入金残高・入金口座を管理画面に表示し、入金完了処理を行えるようにしました
+
 #使用技術  
 Laravel Framework 10.2.5/
 php:8.2.4/
@@ -72,8 +83,8 @@ jquery:3.4.1/
 <img width="624" alt="rese-ER" src="https://github.com/nojinogit/web-3-1/assets/127584258/b24e8e62-20e2-4917-9a18-fb279b4f3b3b">
 
 #環境構築  
-・プロジェクトをコピーしたいディレクトリにて「git clone https://github.com/nojinogit/web-2-1.git」を行いプロジェクトをコピー  
-・「cd web-2-1/src」を行い.env.example のあるディレクトリに移動  
+・プロジェクトをコピーしたいディレクトリにて「git clone https://github.com/nojinogit/web-3-1.git」を行いプロジェクトをコピー  
+・「cd web-3-1/src」を行い.env.example のあるディレクトリに移動  
 ・.env.example をコピーし.env を作成  
 ・.env の　 DB_DATABASE=laravel_db DB_USERNAME=laravel_user DB_PASSWORD=laravel_pass を記載  
 ・docker-compose.yml の存在するディレクトリにて「docker-compose up -d --build」  
@@ -81,19 +92,13 @@ jquery:3.4.1/
 ・コンポーザのアップデート「composer update」  
 ・APP_KEY の作成「php artisan key:generate」  
 ・テーブルの作成「php artisan migrate」もしくは「php artisan migrate:fresh」※私の環境では「fresh」をつけないと git hub からクローンしたプロジェクトではテーブルを作成できませんでした  
-・店舗データ・マスターユーザの作成「php artisan db:seed」  
+・アイテムデータ・マスターユーザの作成「php artisan db:seed」  
 ・シンボリックリンク作成「php artisan storage:link」  
-・php コンテナから「exit」し node コンテナに入る「docker-compose exec node bash」  
-・npm インストール「npm install && npm run build」  
 ・権限のエラーが出た場合は「sudo chmod -R 777 src」にて権限解除してください  
 以上でアプリ使用可能です「localhost/」にて店舗検索ページ開きます。  
-管理者ユーザメールアドレス『admin@admin』パスワード『123456789』でログイン可能です。  
+管理者ユーザメールアドレス『admin@aol.com』パスワード『123456789』でログイン可能です。  
 パスワードリセットメール・認証メール・お知らせメールは Mailpit「localhost:8025/」 に届きます。
 
 ##備考  
 決済システム stripe にはアカウント作成後にテスト環境の公開キー・シークレットキーを.env ファイルの STRIPE_PUBLIC_KEY=　 STRIPE_SECRET_KEY=　に下さい。  
-スケジューラーのテストはコンテナにて『php artisan schedule:work』を行ってください。  
-マネジメント画面から送信できるお知らせメールと当日 AM8:00 に届くお知らせメールは同じ内容です  
-予約時間の 1 時間後になるとレビュー箇所が店舗詳細にでてきますので、すぐに表示したい場合は phpmyadmin「localhost:8080/」から予約時間を作成/変更し、コンテナにて『php artisan schedule:work』を動かしてテストしてください。  
-github のファイルではローカルで環境が完結した方がよいと考え、画像ファイルは storage/app/public/sample に保存されます。デプロイしたアプリでは s3 に保存されるコードにしてあります。  
-店舗代表者を設定すると代表者のマイページに QR コードが表示され、当日の予約一覧にリンクします。
+github のファイルではローカルで環境が完結した方がよいと考え、画像ファイルは storage/app/public/sample に保存されます。デプロイしたアプリでは s3 に保存されるコードにしてあります。
