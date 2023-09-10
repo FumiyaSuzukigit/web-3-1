@@ -1,7 +1,7 @@
 # web-3-1
 
 メルカリ風アプリ『COACHTECH』
-<<img width="1882" alt="COACHTECH index" src="https://github.com/nojinogit/web-3-1/assets/127584258/372d59a0-3cc4-4e3e-83f4-9997d5dc5974">>
+<img width="1882" alt="COACHTECH index" src="https://github.com/nojinogit/web-3-1/assets/127584258/372d59a0-3cc4-4e3e-83f4-9997d5dc5974">
 
 #作成の目的  
 coachtech ブランドのアイテムを出品する。
@@ -93,7 +93,7 @@ jquery:3.4.1/
 ・コンポーザのアップデート「composer update」  
 ・APP_KEY の作成「php artisan key:generate」  
 ・テーブルの作成「php artisan migrate」もしくは「php artisan migrate:fresh」※私の環境では「fresh」をつけないと git hub からクローンしたプロジェクトではテーブルを作成できませんでした  
-・アイテムデータ・マスターユーザの作成「php artisan db:seed」  
+・アイテムデータ・ユーザの作成「php artisan db:seed」  
 ・シンボリックリンク作成「php artisan storage:link」  
 ・権限のエラーが出た場合は「sudo chmod -R 777 src」にて権限解除してください  
 以上でアプリ使用可能です「localhost/」にて店舗検索ページ開きます。  
