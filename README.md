@@ -108,7 +108,7 @@ jquery:3.4.1/
 
 ・webhook について‥今回 stripe の webhook を使い銀行振込・コンビニ入金で購入した商品に対し、金額を入金した時に stripe からの webhook によりアプリのデータベースに入金が記録される機能を実装しました。ですが webhook が https のみに対応しているため aws では機能は反映されていません（ドメインが必要なため見送りました）。ローカル環境では ngork を使用して https 環境を再現し機能の確認ができています。
 
-ローカル環境での webhook の受信の方法 → こちらのサイト「https://biz.addisteria.com/ngrok-windows/」を参考に ngrok を導入して下さい → 次にコードを一部修正します、app/Providers/AppServiceProvider.php の//URL::forceScheme('https');のコメントアウトを外してコードを有効にしてください（https では js・css が崩れてしまうためそれを防ぎます）→ngrok.exe のあるフォルダで shift+右クリックで powershell ウインドウをここで開く →「./ngrok http 127.0.0.1」を入力 →Forwarding の「（例）https://4aca-219-100-86-141.ngrok-free.app 」ここが https の url になるのでブラウザでトップページ開きます。
+ローカル環境での webhook の受信の方法 → こちらのサイト「https://biz.addisteria.com/ngrok-windows/ 」を参考に ngrok を導入して下さい → 次にコードを一部修正します、app/Providers/AppServiceProvider.php の//URL::forceScheme('https');のコメントアウトを外してコードを有効にしてください（https では js・css が崩れてしまうためそれを防ぎます）→ngrok.exe のあるフォルダで shift+右クリックで powershell ウインドウをここで開く →「./ngrok http 127.0.0.1」を入力 →Forwarding の「（例）https://4aca-219-100-86-141.ngrok-free.app 」ここが https の url になるのでブラウザでトップページ開きます。
 
 次に stripe の webhook の設定です → 開発者 →webhook→ エンドポイントを追加 → エンドポイント URL に先ほどの URL の後に/stripe/webhook をつけて入力「（例）https://4aca-219-100-86-141.ngrok-free.app/stripe/webhook 」します → バージョンを最新の API バージョン → リッスンするイベントで payment_intent.succeeded にチェックつけイベント追加。→ 開発者 →webhook の先ほど作成したオンラインエンドポイントをクリック → 署名シークレットをクリックしそこに表示された文字列を.env の STRIPE_WEBHOOK に入れてください。
 
