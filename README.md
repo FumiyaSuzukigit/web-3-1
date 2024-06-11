@@ -117,3 +117,4 @@ jquery:3.4.1/
 これで webhook が動き purchases テーブルの deposited に入金日付が記録されます。コンビニ入金で購入した場合テスト環境では数分すると自動的に strip 側で入金判定が行われ webhook が動くようです。
 
 circleCI について‥テストと aws の EC2 へのデプロイが可能となっておりますが、デプロイに使っているリポジトリは「https://github.com/nojinogit/web-3-dep 」（画像の保存先を s3 に変更したコードにするためリポジトリを分けました）のため現在のリポジトリ「https://github.com/nojinogit/web-3-1 」に push してもテスト・デプロイは行われません（circleCI のプロジェクトのセットアップを行っていません）。一応 web-3-1 の circleCI/config.yml は web-3-dep のファイルと同じものが入っていますので確認はできます。
+# web-3-1
